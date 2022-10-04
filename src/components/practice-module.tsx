@@ -10,6 +10,7 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
+  const [gameFinished, setGameFinished] = useState(false);
 
   const checkAnswer = (
     userAnswer: string,
@@ -22,30 +23,43 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
       setScore(score + 1);
     }
 
+    if (counter === 47) {
+      setGameFinished(true);
+
+      return;
+    }
+
     setCounter(counter + 1);
 
     setAnswer("");
   };
 
   return (
-    <div>
-      <p>{randomizedList[counter].hiragana}</p>
+    <div className="my-8">
+      <p className="text-9xl text-center">{randomizedList[counter].hiragana}</p>
+      <p className="text-center my-8">
+        {!gameFinished
+          ? `On character ${counter + 1} out of 48`
+          : "Practice Complete!"}
+      </p>
       <form
         onSubmit={(event) =>
           checkAnswer(answer, randomizedList[counter].romaji, event)
         }
       >
-        <input
-          type="text"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          className="border border-black"
-          placeholder="Your answer:"
-        />
+        <div className="flex justify-center">
+          <input
+            type="text"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            className="border-b border-black py-2 px-4 mx-auto rounded-sm text-center focus:outline-none"
+            placeholder="Answer here..."
+            disabled={gameFinished}
+          />
+        </div>
       </form>
 
-      <p>Your Score: {score}</p>
-      <p>{`You've answered ${counter} out of 48 characters`}</p>
+      <p className="text-xl text-center mt-2">Your Score: {score}</p>
     </div>
   );
 };

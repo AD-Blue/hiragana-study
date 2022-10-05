@@ -70,7 +70,10 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
         </div>
       </form>
 
-      <p className="text-xl text-center mt-2">Your Score: {score}</p>
+      <p className="text-xl text-center mt-2">{`${score} correct`}</p>
+      <p className="text-xl text-center mt-2">{`${
+        counter - score
+      } incorrect`}</p>
 
       <IncorrectGuessMessage
         userGuess={previousGuess}

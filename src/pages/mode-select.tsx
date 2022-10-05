@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { useState } from "react";
 
-enum Difficulty {
+export enum Difficulty {
   HARD = "HARD",
 }
 

@@ -1,10 +1,12 @@
 import { FormEvent, useState } from "react";
 
 import { Character } from "../models/character";
+import { Difficulty } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
 
 interface PracticeModuleProps {
   randomizedList: Character[];
+  difficulty: Difficulty;
 }
 
 const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {

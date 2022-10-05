@@ -6,8 +6,10 @@ const Home = () => {
     <div className="flex justify-center flex-col">
       <h1 className="text-7xl text-center my-8">ひらがな</h1>
       <Image src="/chart.svg" alt="Hiragana Chart" height={464} width={768} />
-      <Link href="/practice">
-        <a>Practice</a>
+      <Link href="/mode-select">
+        <a className="text-4xl text-center mt-12 border-black border-4 rounded-lg w-fit mx-auto p-2 hover:bg-gray-100">
+          Practice
+        </a>
       </Link>
     </div>
   );

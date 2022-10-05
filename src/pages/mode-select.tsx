@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export enum Difficulty {
+  MEDIUM = "MEDIUM",
   HARD = "HARD",
 }
 
@@ -13,6 +14,15 @@ const ModeSelect = () => {
     <div className="pt-4 px-6 flex flex-col">
       <h1 className="text-5xl text-center mb-4">Select Your Practice Mode</h1>
 
+      <button
+        className={classNames(
+          "text-2xl p-2 border-black border-4 w-fit mx-auto rounded-lg mt-8",
+          difficulty === Difficulty.MEDIUM && "bg-orange-200"
+        )}
+        onClick={() => setDifficulty(Difficulty.MEDIUM)}
+      >
+        Medium
+      </button>
       <button
         className={classNames(
           "text-2xl p-2 border-black border-4 w-fit mx-auto rounded-lg mt-8",

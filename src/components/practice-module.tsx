@@ -9,7 +9,10 @@ interface PracticeModuleProps {
   difficulty: Difficulty;
 }
 
-const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
+const PracticeModule = ({
+  randomizedList,
+  difficulty,
+}: PracticeModuleProps) => {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -66,7 +69,11 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             className="border-b border-black py-2 px-4 mx-auto rounded-sm text-center focus:outline-none"
-            placeholder="Answer here..."
+            placeholder={
+              difficulty === Difficulty.HARD
+                ? "..."
+                : `${randomizedList[counter].romaji[0]}...`
+            }
             disabled={gameFinished}
           />
         </div>

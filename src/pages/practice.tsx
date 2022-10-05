@@ -18,7 +18,7 @@ const Practice = ({ randomizedList }: PracticeProps) => {
 
       <PracticeModule randomizedList={randomizedList} />
 
-      <div className="text-md text-center mt-40 text-gray-700">
+      <div className="text-md text-center mt-28 text-gray-700">
         <p className="mb-4">Refresh to restart</p>
         <Link href="/">
           <a className="underline underline-offset-2">Quit Practice</a>

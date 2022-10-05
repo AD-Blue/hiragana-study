@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 
 import { Character } from "../models/character";
+import IncorrectGuessMessage from "./incorrect-guess-message";
 
 interface PracticeModuleProps {
   randomizedList: Character[];
@@ -11,16 +12,26 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
   const [gameFinished, setGameFinished] = useState(false);
+  const [previousGuess, setPreviousGuess] = useState("");
+  const [previousCharacter, setPreviousCharacter] = useState<Character>(
+    randomizedList[0]
+  );
+  const [previousGuessCorrect, setPreviousGuessCorrect] = useState(true);
 
   const checkAnswer = (
     userAnswer: string,
-    correctAnswer: string,
+    correctAnswer: Character,
     event: FormEvent
   ) => {
     event.preventDefault();
 
-    if (userAnswer === correctAnswer) {
+    if (userAnswer === correctAnswer.romaji) {
       setScore(score + 1);
+      setPreviousGuessCorrect(true);
+    } else {
+      setPreviousGuessCorrect(false);
+      setPreviousGuess(userAnswer);
+      setPreviousCharacter(correctAnswer);
     }
 
     if (counter === 47) {
@@ -35,16 +46,16 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
   };
 
   return (
-    <div className="my-8">
+    <div className="mt-8">
       <p className="text-9xl text-center">{randomizedList[counter].hiragana}</p>
-      <p className="text-center my-8">
+      <p className="text-center mt-8">
         {!gameFinished
           ? `On character ${counter + 1} out of 48`
           : "Practice Complete!"}
       </p>
       <form
         onSubmit={(event) =>
-          checkAnswer(answer, randomizedList[counter].romaji, event)
+          checkAnswer(answer, randomizedList[counter], event)
         }
       >
         <div className="flex justify-center">
@@ -60,6 +71,12 @@ const PracticeModule = ({ randomizedList }: PracticeModuleProps) => {
       </form>
 
       <p className="text-xl text-center mt-2">Your Score: {score}</p>
+
+      <IncorrectGuessMessage
+        userGuess={previousGuess}
+        correctCharacter={previousCharacter}
+        isVisible={!previousGuessCorrect}
+      />
     </div>
   );
 };

@@ -33,7 +33,7 @@ const PracticeModule = ({
   ) => {
     event.preventDefault();
 
-    if (userAnswer === correctAnswer.romaji) {
+    if (userAnswer.toLowerCase() === correctAnswer.romaji) {
       setScore(score + 1);
       setPreviousGuessCorrect(true);
     } else {

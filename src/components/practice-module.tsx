@@ -92,7 +92,7 @@ const PracticeModule = ({
           checkAnswer(answer, randomizedList[counter], event)
         }
       >
-        <div className="flex flex-row text-center justify-evenly w-4/5 mx-auto">
+        <div className="flex flex-row text-center justify-evenly w-4/5 md:w-1/3 mx-auto">
           {difficulty === Difficulty.EASY ? (
             possibleAnswers.map((answer, index) => (
               <button

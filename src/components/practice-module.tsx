@@ -96,9 +96,10 @@ const PracticeModule = ({
           {difficulty === Difficulty.EASY ? (
             possibleAnswers.map((answer, index) => (
               <button
-                className="border-black border-2 text-xl px-2 py rounded-lg my-4 italic"
+                className="border-black border-2 text-xl px-2 py rounded-lg my-4 italic disabled:opacity-50"
                 onClick={() => setAnswer(answer)}
                 key={index}
+                disabled={gameFinished}
               >
                 {answer}
               </button>
@@ -122,7 +123,7 @@ const PracticeModule = ({
 
       <p className="text-xl text-center mt-2">{`${score} correct`}</p>
       <p className="text-xl text-center mt-2">{`${
-        counter - score
+        gameFinished ? counter - score + 1 : counter - score
       } incorrect`}</p>
 
       <IncorrectGuessMessage

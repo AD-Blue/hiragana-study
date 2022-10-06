@@ -5,7 +5,13 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        kosugiMaru: ["Kosugi Maru", "sans-serif"],
+        noto: ["Noto Serif JP", "serif"],
+        roboto: ["Roboto Mono", "monospace"],
+      },
+    },
   },
   plugins: [],
 };

@@ -78,14 +78,16 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
 
   return (
     <div className="mt-8">
-      <p className="text-9xl text-center">{charList[counter].hiragana}</p>
-      <p className="text-center mt-8">
+      <p className="text-9xl text-center font-kosugiMaru">
+        {charList[counter].hiragana}
+      </p>
+      <p className="text-center mt-8 font-roboto">
         {!gameFinished
           ? `On character ${counter + 1} out of ${charList.length}`
           : "Practice Complete!"}
       </p>
       <form onSubmit={(event) => checkAnswer(answer, charList[counter], event)}>
-        <div className="flex flex-row text-center justify-evenly w-4/5 md:w-1/3 mx-auto">
+        <div className="flex flex-row text-center justify-evenly w-4/5 md:w-1/3 mx-auto font-roboto">
           {difficulty === Difficulty.EASY ? (
             possibleAnswers.map((answer, index) => (
               <button
@@ -114,8 +116,8 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
         </div>
       </form>
 
-      <p className="text-xl text-center mt-2">{`${score} correct`}</p>
-      <p className="text-xl text-center mt-2">{`${
+      <p className="text-xl text-center mt-2 font-roboto">{`${score} correct`}</p>
+      <p className="text-xl text-center mt-2 font-roboto">{`${
         gameFinished ? counter - score + 1 : counter - score
       } incorrect`}</p>
 

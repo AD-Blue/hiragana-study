@@ -13,7 +13,12 @@ const IncorrectGuessMessage: React.FC<IncorrectGuessMessageProps> = ({
   isVisible,
 }) => {
   return (
-    <div className={classNames("text-center mt-8", !isVisible && "opacity-0")}>
+    <div
+      className={classNames(
+        "text-center mt-8 font-roboto",
+        !isVisible && "opacity-0"
+      )}
+    >
       <p>
         {userGuess
           ? `${userGuess} was incorrect :(`

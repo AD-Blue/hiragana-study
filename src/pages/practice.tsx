@@ -14,7 +14,7 @@ interface PracticeProps {
 
 const Practice = ({ charList, difficulty }: PracticeProps) => {
   return (
-    <div className="pt-4 px-6">
+    <div className="pt-4 px-6 font-roboto">
       <h1 className="text-5xl text-center mb-4">Practice</h1>
       <p className="text-center">
         Type the pronunciation of the hiragana character that appears on screen

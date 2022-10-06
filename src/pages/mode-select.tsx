@@ -56,9 +56,10 @@ const ModeSelect = () => {
   };
 
   return (
-    <div className="pt-4 px-6 flex flex-col">
-      <h1 className="text-5xl text-center mb-4">Select Your Practice Mode</h1>
+    <div className="pt-4 px-6 flex flex-col font-roboto">
+      <h1 className="text-5xl text-center mb-4 ">Select Your Practice Mode</h1>
 
+      <p className="text-2xl text-center mt-8">Difficulty</p>
       <div className="flex justify-around w-full">
         <button
           className={classNames(
@@ -89,6 +90,7 @@ const ModeSelect = () => {
         </button>
       </div>
 
+      <p className="text-2xl text-center mt-16">Character Set</p>
       <div className="mt-8 grid grid-cols-5 grid-rows-3 gap-4">
         <button
           className={classNames(

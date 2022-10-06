@@ -23,7 +23,7 @@ export enum Column {
 
 const ModeSelect = () => {
   const [difficulty, setDifficulty] = useState<string>("");
-  const [columns, setColumns] = useState<string[]>([]);
+  const [columns, setColumns] = useState<string[]>(["All"]);
 
   const handleCharClick = (char: string) => {
     if (columns.includes(char)) {

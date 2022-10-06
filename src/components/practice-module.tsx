@@ -7,21 +7,18 @@ import { Difficulty } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
 
 interface PracticeModuleProps {
-  randomizedList: Character[];
+  charList: Character[];
   difficulty: Difficulty;
 }
 
-const PracticeModule = ({
-  randomizedList,
-  difficulty,
-}: PracticeModuleProps) => {
+const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
   const [gameFinished, setGameFinished] = useState(false);
   const [previousGuess, setPreviousGuess] = useState("");
   const [previousCharacter, setPreviousCharacter] = useState<Character>(
-    randomizedList[0]
+    charList[0]
   );
   const [previousGuessCorrect, setPreviousGuessCorrect] = useState(true);
   const [possibleAnswers, setPossibleAnswers] = useState<string[]>([]);
@@ -42,7 +39,7 @@ const PracticeModule = ({
       setPreviousCharacter(correctAnswer);
     }
 
-    if (counter === 47) {
+    if (counter === charList.length - 1) {
       setGameFinished(true);
 
       return;
@@ -57,41 +54,37 @@ const PracticeModule = ({
     const randomChars = [];
 
     while (randomChars.length < 2) {
-      const randomIndex = randomInt(randomizedList.length);
+      const randomIndex = randomInt(charList.length);
 
-      if (randomizedList[randomIndex] === randomizedList[counter]) {
+      if (charList[randomIndex] === charList[counter]) {
         continue;
       }
 
       if (
         randomChars.length === 1 &&
-        randomChars[0] === randomizedList[randomIndex].romaji
+        randomChars[0] === charList[randomIndex].romaji
       ) {
         continue;
       }
 
-      randomChars.push(randomizedList[randomIndex].romaji);
+      randomChars.push(charList[randomIndex].romaji);
     }
 
     setPossibleAnswers(
-      fisherYatesShuffle([randomizedList[counter].romaji, ...randomChars])
+      fisherYatesShuffle([charList[counter].romaji, ...randomChars])
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
 
   return (
     <div className="mt-8">
-      <p className="text-9xl text-center">{randomizedList[counter].hiragana}</p>
+      <p className="text-9xl text-center">{charList[counter].hiragana}</p>
       <p className="text-center mt-8">
         {!gameFinished
-          ? `On character ${counter + 1} out of 48`
+          ? `On character ${counter + 1} out of ${charList.length}`
           : "Practice Complete!"}
       </p>
-      <form
-        onSubmit={(event) =>
-          checkAnswer(answer, randomizedList[counter], event)
-        }
-      >
+      <form onSubmit={(event) => checkAnswer(answer, charList[counter], event)}>
         <div className="flex flex-row text-center justify-evenly w-4/5 md:w-1/3 mx-auto">
           {difficulty === Difficulty.EASY ? (
             possibleAnswers.map((answer, index) => (
@@ -113,7 +106,7 @@ const PracticeModule = ({
               placeholder={
                 difficulty === Difficulty.HARD
                   ? "..."
-                  : `${randomizedList[counter].romaji[0]}...`
+                  : `${charList[counter].romaji[0]}...`
               }
               disabled={gameFinished}
             />

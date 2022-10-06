@@ -238,4 +238,16 @@ const fullAlphabet: Character[] = [
   },
 ];
 
-export { fullAlphabet };
+export {
+  singleChars,
+  kChars,
+  sChars,
+  tChars,
+  nChars,
+  hChars,
+  mChars,
+  yChars,
+  rChars,
+  wChars,
+  fullAlphabet,
+};

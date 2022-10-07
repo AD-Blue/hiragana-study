@@ -1,5 +1,7 @@
 import {
+  basicAlphabet,
   Character,
+  fullAlphabet,
   hChars,
   kChars,
   mChars,
@@ -15,6 +17,14 @@ import { fisherYatesShuffle } from "./fisher-yates-shuffle";
 
 const buildListFromParams = (selectedChars: string[]): Character[] => {
   const charList: Character[] = [];
+
+  if (selectedChars.includes("All")) {
+    return fisherYatesShuffle(fullAlphabet);
+  }
+
+  if (selectedChars.includes("Basic")) {
+    return fisherYatesShuffle(basicAlphabet);
+  }
 
   if (selectedChars.includes("Single")) {
     charList.push(...singleChars);

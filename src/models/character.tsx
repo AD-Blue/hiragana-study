@@ -238,6 +238,10 @@ const gChars: Character[] = [
     hiragana: "げ",
     romaji: "ge",
   },
+  {
+    hiragana: "ご",
+    romaji: "go",
+  },
 ];
 
 const zChars: Character[] = [

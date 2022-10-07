@@ -51,9 +51,7 @@ const getServerSideProps = (context: NextPageContext) => {
 
   const columnsList = (columns as string).split("-");
 
-  const charList = columnsList.includes("All")
-    ? fisherYatesShuffle(fullAlphabet)
-    : buildListFromParams(columnsList);
+  const charList = buildListFromParams(columnsList);
 
   return {
     props: {

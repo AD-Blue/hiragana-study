@@ -19,6 +19,11 @@ export enum Column {
   Y = "Y",
   R = "R",
   W = "W",
+  G = "G",
+  Z = "Z",
+  D = "D",
+  B = "B",
+  P = "P",
 }
 
 const ModeSelect = () => {
@@ -32,7 +37,10 @@ const ModeSelect = () => {
       return;
     }
 
-    setColumns([...columns.filter((item) => item !== "All"), char]);
+    setColumns([
+      ...columns.filter((item) => item !== "All" && item !== "Basic"),
+      char,
+    ]);
   };
 
   const handleAllClick = () => {
@@ -43,6 +51,16 @@ const ModeSelect = () => {
     }
 
     setColumns(["All"]);
+  };
+
+  const handleBasicClick = () => {
+    if (columns.includes("Basic")) {
+      setColumns([]);
+
+      return;
+    }
+
+    setColumns(["Basic"]);
   };
 
   const arrayToString = (stringArr: string[]): string => {
@@ -91,16 +109,27 @@ const ModeSelect = () => {
       </div>
 
       <p className="text-2xl text-center mt-16">Character Set</p>
-      <div className="mt-8 grid grid-cols-5 grid-rows-3 gap-4">
-        <button
-          className={classNames(
-            "col-span-5 border-black border-4 p-2 w-fit mx-auto rounded-lg",
-            columns.includes("All") && "bg-orange-200"
-          )}
-          onClick={handleAllClick}
-        >
-          All
-        </button>
+      <div className="mt-8 grid grid-cols-5 gap-4">
+        <div className="flex col-span-5 justify-around w-3/5 mx-auto">
+          <button
+            className={classNames(
+              "border-black border-4 p-2 w-fit mx-auto rounded-lg",
+              columns.includes("All") && "bg-orange-200"
+            )}
+            onClick={handleAllClick}
+          >
+            All
+          </button>
+          <button
+            className={classNames(
+              "border-black border-4 p-2 w-fit mx-auto rounded-lg",
+              columns.includes("Basic") && "bg-orange-200"
+            )}
+            onClick={handleBasicClick}
+          >
+            Basic
+          </button>
+        </div>
         {Object.values(Column).map((char, index) => (
           <button
             className={classNames(

@@ -221,7 +221,118 @@ const wChars: Character[] = [
   },
 ];
 
-const fullAlphabet: Character[] = [
+const gChars: Character[] = [
+  {
+    hiragana: "が",
+    romaji: "ga",
+  },
+  {
+    hiragana: "ぎ",
+    romaji: "gi",
+  },
+  {
+    hiragana: "ぐ",
+    romaji: "gu",
+  },
+  {
+    hiragana: "げ",
+    romaji: "ge",
+  },
+];
+
+const zChars: Character[] = [
+  {
+    hiragana: "ざ",
+    romaji: "za",
+  },
+  {
+    hiragana: "じ",
+    romaji: "ji",
+  },
+  {
+    hiragana: "ず",
+    romaji: "zu",
+  },
+  {
+    hiragana: "ぜ",
+    romaji: "ze",
+  },
+  {
+    hiragana: "ぞ",
+    romaji: "zo",
+  },
+];
+
+const dChars: Character[] = [
+  {
+    hiragana: "だ",
+    romaji: "da",
+  },
+  {
+    hiragana: "ぢ",
+    romaji: "dji",
+  },
+  {
+    hiragana: "づ",
+    romaji: "dzu",
+  },
+  {
+    hiragana: "で",
+    romaji: "de",
+  },
+  {
+    hiragana: "ど",
+    romaji: "do",
+  },
+];
+
+const bChars: Character[] = [
+  {
+    hiragana: "ば",
+    romaji: "ba",
+  },
+  {
+    hiragana: "び",
+    romaji: "bi",
+  },
+  {
+    hiragana: "ぶ",
+    romaji: "bu",
+  },
+  {
+    hiragana: "べ",
+    romaji: "be",
+  },
+  {
+    hiragana: "ぼ",
+    romaji: "bo",
+  },
+];
+
+const pChars: Character[] = [
+  {
+    hiragana: "ぱ",
+    romaji: "pa",
+  },
+  {
+    hiragana: "ぴ",
+    romaji: "pi",
+  },
+  {
+    hiragana: "ぷ",
+    romaji: "pu",
+  },
+  {
+    hiragana: "ぺ",
+    romaji: "pe",
+  },
+  {
+    hiragana: "ぽ",
+    romaji: "po",
+  },
+];
+
+const basicAlphabet: Character[] = [
   ...singleChars,
   ...kChars,
   ...sChars,
@@ -238,6 +349,15 @@ const fullAlphabet: Character[] = [
   },
 ];
 
+const fullAlphabet: Character[] = [
+  ...basicAlphabet,
+  ...gChars,
+  ...zChars,
+  ...dChars,
+  ...bChars,
+  ...pChars,
+];
+
 export {
   singleChars,
   kChars,
@@ -249,5 +369,6 @@ export {
   yChars,
   rChars,
   wChars,
+  basicAlphabet,
   fullAlphabet,
 };

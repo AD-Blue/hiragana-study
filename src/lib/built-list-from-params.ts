@@ -1,17 +1,22 @@
 import {
   basicAlphabet,
+  bChars,
   Character,
+  dChars,
   fullAlphabet,
+  gChars,
   hChars,
   kChars,
   mChars,
   nChars,
+  pChars,
   rChars,
   sChars,
   singleChars,
   tChars,
   wChars,
   yChars,
+  zChars,
 } from "../models/character";
 import { fisherYatesShuffle } from "./fisher-yates-shuffle";
 
@@ -64,6 +69,26 @@ const buildListFromParams = (selectedChars: string[]): Character[] => {
 
   if (selectedChars.includes("W")) {
     charList.push(...wChars);
+  }
+
+  if (selectedChars.includes("G")) {
+    charList.push(...gChars);
+  }
+
+  if (selectedChars.includes("Z")) {
+    charList.push(...zChars);
+  }
+
+  if (selectedChars.includes("D")) {
+    charList.push(...dChars);
+  }
+
+  if (selectedChars.includes("B")) {
+    charList.push(...bChars);
+  }
+
+  if (selectedChars.includes("P")) {
+    charList.push(...pChars);
   }
 
   return fisherYatesShuffle(charList);

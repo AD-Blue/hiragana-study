@@ -373,6 +373,11 @@ export {
   yChars,
   rChars,
   wChars,
+  gChars,
+  zChars,
+  dChars,
+  bChars,
+  pChars,
   basicAlphabet,
   fullAlphabet,
 };

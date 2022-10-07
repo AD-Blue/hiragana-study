@@ -24,9 +24,14 @@ const Practice = ({ charList, difficulty }: PracticeProps) => {
 
       <div className="text-md text-center mt-28 text-gray-700">
         <p className="mb-4">Refresh to restart</p>
-        <Link href="/">
-          <a className="underline underline-offset-2">Quit Practice</a>
-        </Link>
+        <div className="flex justify-between w-3/5 md:w-1/5 mx-auto">
+          <Link href="mode-select">
+            <a className="underline underline-offset-2">Mode Select</a>
+          </Link>
+          <Link href="/">
+            <a className="underline underline-offset-2">Quit Practice</a>
+          </Link>
+        </div>
       </div>
     </div>
   );

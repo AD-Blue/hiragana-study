@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["plugin:@next/next/recommended", "eslint-config-next"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  }
 }

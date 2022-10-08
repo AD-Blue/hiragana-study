@@ -3,8 +3,7 @@ import Link from "next/link";
 
 import PracticeModule from "../components/practice-module";
 import { buildListFromParams } from "../lib/built-list-from-params";
-import { fisherYatesShuffle } from "../lib/fisher-yates-shuffle";
-import { Character, fullAlphabet } from "../models/character";
+import { Character } from "../models/character";
 import { Difficulty } from "./mode-select";
 
 interface PracticeProps {

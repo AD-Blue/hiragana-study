@@ -1,7 +1,9 @@
 import { FormEvent, useEffect, useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { useRouter } from "next/router";
+
 import { fisherYatesShuffle } from "../lib/fisher-yates-shuffle";
 import { randomInt } from "../lib/random-int";
-
 import { Character } from "../models/character";
 import { Difficulty } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
@@ -22,6 +24,8 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
   );
   const [previousGuessCorrect, setPreviousGuessCorrect] = useState(true);
   const [possibleAnswers, setPossibleAnswers] = useState<string[]>([]);
+
+  const router = useRouter();
 
   const checkAnswer = (
     userAnswer: string,
@@ -73,8 +77,9 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
     setPossibleAnswers(
       fisherYatesShuffle([charList[counter].romaji, ...randomChars])
     );
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [counter]);
+  }, [counter, gameFinished]);
 
   return (
     <div className="mt-8">
@@ -116,16 +121,25 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
         </div>
       </form>
 
-      <p className="text-xl text-center mt-2 font-roboto">{`${score} correct`}</p>
-      <p className="text-xl text-center mt-2 font-roboto">{`${
-        gameFinished ? counter - score + 1 : counter - score
-      } incorrect`}</p>
-
       <IncorrectGuessMessage
         userGuess={previousGuess}
         correctCharacter={previousCharacter}
         isVisible={!previousGuessCorrect}
       />
+
+      <Dialog
+        className="absolute inset-0 mx-auto mt-20 bg-gray-400 w-4/5 h-3/5 rounded-md opacity-90"
+        open={gameFinished}
+        onClose={() => router.push(router.asPath)}
+      >
+        <p className="text-4xl text-center font-roboto mb-14 mt-8">
+          Game Finished
+        </p>
+        <p className="text-xl text-center mt-2 font-roboto">{`${score} correct`}</p>
+        <p className="text-xl text-center mt-2 font-roboto">{`${
+          gameFinished ? counter - score + 1 : counter - score
+        } incorrect`}</p>
+      </Dialog>
     </div>
   );
 };

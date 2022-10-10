@@ -1,6 +1,9 @@
 import classNames from "classnames";
 import Link from "next/link";
 import { useState } from "react";
+import CharSelectButton from "../components/char-select-button";
+import CharSetButton, { CharSet } from "../components/char-set-button";
+import DifficultyButton from "../components/difficulty-button";
 
 export enum Difficulty {
   EASY = "EASY",
@@ -27,7 +30,7 @@ export enum Column {
 }
 
 const ModeSelect = () => {
-  const [difficulty, setDifficulty] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.HARD);
   const [columns, setColumns] = useState<string[]>(["All"]);
 
   const handleCharClick = (char: string) => {
@@ -79,68 +82,37 @@ const ModeSelect = () => {
 
       <p className="text-2xl text-center mt-8">Difficulty</p>
       <div className="flex justify-around w-full">
-        <button
-          className={classNames(
-            "text-2xl p-2 border-black border-4 w-fit mx-auto rounded-lg mt-8",
-            difficulty === Difficulty.EASY && "bg-orange-200"
-          )}
-          onClick={() => setDifficulty(Difficulty.EASY)}
-        >
-          Easy
-        </button>
-        <button
-          className={classNames(
-            "text-2xl p-2 border-black border-4 w-fit mx-auto rounded-lg mt-8",
-            difficulty === Difficulty.MEDIUM && "bg-orange-200"
-          )}
-          onClick={() => setDifficulty(Difficulty.MEDIUM)}
-        >
-          Medium
-        </button>
-        <button
-          className={classNames(
-            "text-2xl p-2 border-black border-4 w-fit mx-auto rounded-lg mt-8",
-            difficulty === Difficulty.HARD && "bg-orange-200"
-          )}
-          onClick={() => setDifficulty(Difficulty.HARD)}
-        >
-          Hard
-        </button>
+        {Object.values(Difficulty).map((difficultyLevel, index) => (
+          <DifficultyButton
+            key={index}
+            currentDifficulty={difficulty}
+            difficultyLevel={difficultyLevel}
+            onClick={() => setDifficulty(difficultyLevel)}
+          />
+        ))}
       </div>
 
       <p className="text-2xl text-center mt-16">Character Set</p>
       <div className="mt-8 grid grid-cols-5 gap-4">
         <div className="flex col-span-5 justify-around w-3/5 mx-auto">
-          <button
-            className={classNames(
-              "border-black border-4 p-2 w-fit mx-auto rounded-lg",
-              columns.includes("All") && "bg-orange-200"
-            )}
+          <CharSetButton
+            charSetName={CharSet.ALL}
+            currentSelectedCharsList={columns}
             onClick={handleAllClick}
-          >
-            All
-          </button>
-          <button
-            className={classNames(
-              "border-black border-4 p-2 w-fit mx-auto rounded-lg",
-              columns.includes("Basic") && "bg-orange-200"
-            )}
+          />
+          <CharSetButton
+            charSetName={CharSet.BASIC}
+            currentSelectedCharsList={columns}
             onClick={handleBasicClick}
-          >
-            Basic
-          </button>
+          />
         </div>
         {Object.values(Column).map((char, index) => (
-          <button
-            className={classNames(
-              "border-black border-4 p-2 rounded-lg",
-              columns.includes(char) && "bg-orange-200"
-            )}
+          <CharSelectButton
             key={index}
+            character={char}
+            currentSelectedCharsList={columns}
             onClick={() => handleCharClick(char)}
-          >
-            {char}
-          </button>
+          />
         ))}
       </div>
 
@@ -150,7 +122,7 @@ const ModeSelect = () => {
         )}&columns=${encodeURIComponent(arrayToString(columns))}`}
       >
         <button
-          disabled={difficulty === "" || columns.length === 0}
+          disabled={columns.length === 0}
           className="text-4xl text-center mt-12 border-black border-4 rounded-lg w-fit mx-auto p-2 hover:bg-gray-100 disabled:opacity-50 disabled:hover:cursor-not-allowed disabled:hover:bg-white"
         >
           Start

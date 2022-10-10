@@ -7,6 +7,7 @@ import { randomInt } from "../lib/random-int";
 import { Character } from "../models/character";
 import { Difficulty } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
+import Link from "next/link";
 
 interface PracticeModuleProps {
   charList: Character[];
@@ -24,6 +25,9 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
   );
   const [previousGuessCorrect, setPreviousGuessCorrect] = useState(true);
   const [possibleAnswers, setPossibleAnswers] = useState<string[]>([]);
+  const [incorrectCharacters, setIncorrectCharacters] = useState<Character[]>(
+    []
+  );
 
   const router = useRouter();
 
@@ -41,6 +45,7 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
       setPreviousGuessCorrect(false);
       setPreviousGuess(userAnswer);
       setPreviousCharacter(correctAnswer);
+      setIncorrectCharacters([...incorrectCharacters, correctAnswer]);
     }
 
     if (counter === charList.length - 1) {
@@ -128,17 +133,33 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
       />
 
       <Dialog
-        className="absolute inset-0 mx-auto mt-20 bg-gray-400 w-4/5 h-3/5 rounded-md opacity-90"
+        className="text-center font-roboto p-2 absolute inset-0 mx-auto my-20 bg-gray-200 w-4/5 min-h-3/5 rounded-md opacity-90"
         open={gameFinished}
         onClose={() => router.push(router.asPath)}
       >
+        <Link href="/mode-select">
+          <a className="mt-8">Back to mode select</a>
+        </Link>
         <p className="text-4xl text-center font-roboto mb-14 mt-8">
           Game Finished
         </p>
-        <p className="text-xl text-center mt-2 font-roboto">{`${score} correct`}</p>
-        <p className="text-xl text-center mt-2 font-roboto">{`${
+        <p className="text-xl mt-2">{`${score} correct`}</p>
+        <p className="text-xl mt-2">{`${
           gameFinished ? counter - score + 1 : counter - score
         } incorrect`}</p>
+
+        <p className="mt-8 mb-4">
+          {incorrectCharacters.length === 0
+            ? "Nice job! All of your answers were correct 😎"
+            : "Good try! Here are the characters you missed:"}
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 overflow-y-scroll max-h-44 sm:max-h-64">
+          {incorrectCharacters.map((char, index) => (
+            <p key={index}>
+              {char.romaji} = {char.hiragana}
+            </p>
+          ))}
+        </div>
       </Dialog>
     </div>
   );

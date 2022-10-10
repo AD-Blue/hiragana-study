@@ -1,13 +1,11 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { useRouter } from "next/router";
 
 import { fisherYatesShuffle } from "../lib/fisher-yates-shuffle";
 import { randomInt } from "../lib/random-int";
 import { Character } from "../models/character";
 import { Difficulty } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
-import Link from "next/link";
+import PostGameDialog from "./post-game-dialog";
 
 interface PracticeModuleProps {
   charList: Character[];
@@ -28,8 +26,6 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
   const [incorrectCharacters, setIncorrectCharacters] = useState<Character[]>(
     []
   );
-
-  const router = useRouter();
 
   const checkAnswer = (
     userAnswer: string,
@@ -132,35 +128,12 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
         isVisible={!previousGuessCorrect}
       />
 
-      <Dialog
-        className="text-center font-roboto p-2 absolute inset-0 mx-auto my-20 bg-gray-200 w-4/5 min-h-3/5 rounded-md opacity-90"
-        open={gameFinished}
-        onClose={() => router.push(router.asPath)}
-      >
-        <Link href="/mode-select">
-          <a className="mt-8">Back to mode select</a>
-        </Link>
-        <p className="text-4xl text-center font-roboto mb-14 mt-8">
-          Game Finished
-        </p>
-        <p className="text-xl mt-2">{`${score} correct`}</p>
-        <p className="text-xl mt-2">{`${
-          gameFinished ? counter - score + 1 : counter - score
-        } incorrect`}</p>
-
-        <p className="mt-8 mb-4">
-          {incorrectCharacters.length === 0
-            ? "Nice job! All of your answers were correct 😎"
-            : "Good try! Here are the characters you missed:"}
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 overflow-y-scroll max-h-44 sm:max-h-64">
-          {incorrectCharacters.map((char, index) => (
-            <p key={index}>
-              {char.romaji} = {char.hiragana}
-            </p>
-          ))}
-        </div>
-      </Dialog>
+      <PostGameDialog
+        isOpen={gameFinished}
+        correctGuesses={score}
+        incorrectGuesses={counter - score + 1}
+        incorrectCharList={incorrectCharacters}
+      />
     </div>
   );
 };

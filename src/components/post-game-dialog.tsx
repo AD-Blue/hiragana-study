@@ -25,9 +25,6 @@ const PostGameDialog = ({
       open={isOpen}
       onClose={() => router.push(router.asPath)}
     >
-      <Link href="/mode-select">
-        <a className="mt-8 underline underline-offset-2">Back to mode select</a>
-      </Link>
       <p className="text-4xl text-center font-roboto mb-14 mt-8">
         Game Finished
       </p>
@@ -39,13 +36,16 @@ const PostGameDialog = ({
           ? "Nice job! All of your answers were correct 😎"
           : "Good try! Here are the characters you missed:"}
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 overflow-y-scroll max-h-44 sm:max-h-64">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 overflow-y-scroll max-h-44 sm:max-h-64 mb-14">
         {incorrectCharList.map((char, index) => (
           <p key={index}>
             {char.romaji} = {char.hiragana}
           </p>
         ))}
       </div>
+      <Link href="/mode-select">
+        <a className="underline underline-offset-2">Back to mode select</a>
+      </Link>
     </Dialog>
   );
 };

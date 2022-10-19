@@ -4,6 +4,7 @@ import { fisherYatesShuffle } from "../lib/fisher-yates-shuffle";
 import { randomInt } from "../lib/random-int";
 import { Character } from "../models/character";
 import { Difficulty } from "../pages/mode-select";
+import { usePracticeModuleContext } from "./context/practice-module-context";
 import IncorrectGuessMessage from "./incorrect-guess-message";
 import PostGameDialog from "./post-game-dialog";
 
@@ -13,8 +14,10 @@ interface PracticeModuleProps {
 }
 
 const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
-  const [counter, setCounter] = useState(0);
-  const [score, setScore] = useState(0);
+  const contextValues = usePracticeModuleContext();
+
+  const { counter, setCounter, score, setScore } = contextValues;
+
   const [answer, setAnswer] = useState("");
   const [gameFinished, setGameFinished] = useState(false);
   const [previousGuess, setPreviousGuess] = useState("");
@@ -26,6 +29,10 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
   const [incorrectCharacters, setIncorrectCharacters] = useState<Character[]>(
     []
   );
+
+  if (!score || !setScore || !counter || !setCounter) {
+    throw new Error("whoops");
+  }
 
   const checkAnswer = (
     userAnswer: string,

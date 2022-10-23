@@ -43,9 +43,20 @@ const PostGameDialog = ({
           </p>
         ))}
       </div>
-      <Link href="/mode-select">
-        <a className="underline underline-offset-2">Back to mode select</a>
-      </Link>
+
+      <div className="flex flex-col">
+        <Link href="/mode-select">
+          <a className="underline underline-offset-2 mb-4">
+            Back to mode select
+          </a>
+        </Link>
+        <button
+          className="underline underline-offset-2"
+          onClick={() => router.reload()}
+        >
+          Restart
+        </button>
+      </div>
     </Dialog>
   );
 };

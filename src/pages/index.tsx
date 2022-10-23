@@ -1,4 +1,4 @@
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,14 +17,12 @@ const Home = () => {
         </a>
       </Link>
 
-      {!session && (
-        <button
-          className="font-roboto text-center mt-6 border-black border-4 rounded-lg w-fit mx-auto p-2 hover:bg-gray-100"
-          onClick={() => signIn()}
-        >
-          Sign in
-        </button>
-      )}
+      <button
+        className="font-roboto text-center mt-6 border-black border-4 rounded-lg w-fit mx-auto p-2 hover:bg-gray-100"
+        onClick={() => (session ? signOut() : signIn())}
+      >
+        {session ? "Sign out" : "Sign in"}
+      </button>
     </div>
   );
 };

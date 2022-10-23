@@ -44,7 +44,7 @@ const PostGameDialog = ({
         ))}
       </div>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col w-fit mx-auto">
         <Link href="/mode-select">
           <a className="underline underline-offset-2 mb-4">
             Back to mode select

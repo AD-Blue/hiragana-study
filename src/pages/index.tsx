@@ -11,9 +11,9 @@ const Home = () => {
       <div className="mx-auto">
         <Image src="/chart.svg" alt="Hiragana Chart" height={464} width={768} />
       </div>
-      <Link href="/mode-select">
+      <Link href="/game">
         <a className="font-roboto text-center mt-12 border-black border-4 rounded-lg w-fit mx-auto p-2 hover:bg-gray-100">
-          Practice
+          Start
         </a>
       </Link>
 

@@ -10,9 +10,10 @@ import PostGameDialog from "./post-game-dialog";
 interface PracticeModuleProps {
   charList: Character[];
   difficulty: Difficulty;
+  katakana: boolean
 }
 
-const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
+const PracticeModule = ({ charList, difficulty, katakana }: PracticeModuleProps) => {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -84,9 +85,15 @@ const PracticeModule = ({ charList, difficulty }: PracticeModuleProps) => {
 
   return (
     <div className="mt-8">
-      <p className="text-9xl text-center font-kosugiMaru">
-        {charList[counter].hiragana}
-      </p>
+      <div className='flex flex-row justify-center'>
+        <p className="text-9xl text-center font-kosugiMaru">
+          {charList[counter].hiragana}
+        </p>
+        {katakana && <p className="text-9xl text-center border-l border-black font-kosugiMaru">
+          {charList[counter].katakana}
+        </p>}
+
+      </div>
       <p className="text-center mt-8 font-roboto">
         {!gameFinished
           ? `On character ${counter + 1} out of ${charList.length}`

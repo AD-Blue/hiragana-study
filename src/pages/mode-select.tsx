@@ -32,6 +32,7 @@ export enum Column {
 const ModeSelect = () => {
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.HARD);
   const [columns, setColumns] = useState<string[]>(["All"]);
+  const [katakanaEnabled, setKatakanaEnabled] = useState<boolean>(false);
 
   const handleCharClick = (char: string) => {
     if (columns.includes(char)) {
@@ -116,10 +117,16 @@ const ModeSelect = () => {
         ))}
       </div>
 
+      <button className={classNames("self-center text-2xl text-center mt-12 rounded-lg w-fit border-4 border-black p-2 hover:bg-slate-200", katakanaEnabled && 'bg-sky-200')} onClick={() => setKatakanaEnabled(!katakanaEnabled)}>
+        Enable Katakana
+      </button>
+
       <Link
         href={`/practice?difficulty=${encodeURIComponent(
           difficulty
-        )}&columns=${encodeURIComponent(arrayToString(columns))}`}
+        )}&columns=${encodeURIComponent(arrayToString(
+          columns
+        ))}&katakana=${encodeURIComponent(katakanaEnabled)}`}
       >
         <button
           disabled={columns.length === 0}

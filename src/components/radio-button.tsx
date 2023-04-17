@@ -1,19 +1,17 @@
 import classNames from "classnames";
 import { toSentenceCase } from "../lib/to-sentence-case";
 
-import { Difficulty } from "../pages/mode-select";
-
-interface DifficultyButtonProps {
-  currentDifficulty: Difficulty;
-  difficultyLevel: Difficulty;
+interface RadioButtonProps {
+  currentDifficulty: string;
+  difficultyLevel: string;
   onClick: () => void;
 }
 
-const DifficultyButton = ({
+const RadioButton = ({
   currentDifficulty,
   difficultyLevel,
   onClick,
-}: DifficultyButtonProps) => {
+}: RadioButtonProps) => {
   return (
     <button
       className={classNames(
@@ -27,4 +25,4 @@ const DifficultyButton = ({
   );
 };
 
-export default DifficultyButton;
+export { RadioButton };

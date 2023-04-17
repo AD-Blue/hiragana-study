@@ -1,9 +1,9 @@
-import classNames from "classnames";
 import Link from "next/link";
 import { useState } from "react";
+
 import CharSelectButton from "../components/char-select-button";
 import CharSetButton, { CharSet } from "../components/char-set-button";
-import DifficultyButton from "../components/difficulty-button";
+import { RadioButton } from "../components/radio-button";
 
 export enum Difficulty {
   EASY = "EASY",
@@ -12,7 +12,7 @@ export enum Difficulty {
 }
 
 export enum Column {
-  SINGLE = "Single",
+  SINGLE = "Ones",
   K = "K",
   S = "S",
   T = "T",
@@ -29,10 +29,16 @@ export enum Column {
   P = "P",
 }
 
+export enum Mode {
+  HIRAGANA = "HIRAGANA",
+  KATAKANA = "KATAKANA",
+  DUAL = "DUAL"
+}
+
 const ModeSelect = () => {
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.HARD);
   const [columns, setColumns] = useState<string[]>(["All"]);
-  const [katakanaEnabled, setKatakanaEnabled] = useState<boolean>(false);
+  const [mode, setMode] = useState<Mode>(Mode.HIRAGANA)
 
   const handleCharClick = (char: string) => {
     if (columns.includes(char)) {
@@ -81,16 +87,34 @@ const ModeSelect = () => {
     <div className="pt-4 px-6 flex flex-col font-roboto">
       <h1 className="text-5xl text-center mb-4 ">Select Your Practice Mode</h1>
 
-      <p className="text-2xl text-center mt-8">Difficulty</p>
-      <div className="flex justify-around w-full">
-        {Object.values(Difficulty).map((difficultyLevel, index) => (
-          <DifficultyButton
-            key={index}
-            currentDifficulty={difficulty}
-            difficultyLevel={difficultyLevel}
-            onClick={() => setDifficulty(difficultyLevel)}
-          />
-        ))}
+      <div className='flex justify-around w-full flex-col md:flex-row'>
+        <div className="flex flex-col sm:w-1/3">
+          <p className="text-2xl text-center mt-8">Difficulty</p>
+          <div className="flex justify-around">
+            {Object.values(Difficulty).map((difficultyLevel, index) => (
+              <RadioButton
+                key={index}
+                currentDifficulty={difficulty}
+                difficultyLevel={difficultyLevel}
+                onClick={() => setDifficulty(difficultyLevel)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:w-1/3">
+          <p className="text-2xl text-center mt-8">Mode</p>
+          <div className="flex justify-around w-full">
+            {Object.values(Mode).map((selectMode, index) => (
+              <RadioButton
+                key={index}
+                currentDifficulty={mode}
+                difficultyLevel={selectMode}
+                onClick={() => setMode(selectMode)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       <p className="text-2xl text-center mt-16">Character Set</p>
@@ -117,16 +141,12 @@ const ModeSelect = () => {
         ))}
       </div>
 
-      <button className={classNames("self-center text-2xl text-center mt-12 rounded-lg w-fit border-4 border-black p-2 hover:bg-slate-200", katakanaEnabled && 'bg-sky-200')} onClick={() => setKatakanaEnabled(!katakanaEnabled)}>
-        Enable Katakana
-      </button>
-
       <Link
         href={`/practice?difficulty=${encodeURIComponent(
           difficulty
         )}&columns=${encodeURIComponent(arrayToString(
           columns
-        ))}&katakana=${encodeURIComponent(katakanaEnabled)}`}
+        ))}&mode=${encodeURIComponent(mode)}`}
       >
         <button
           disabled={columns.length === 0}

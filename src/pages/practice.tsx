@@ -4,15 +4,15 @@ import Link from "next/link";
 import PracticeModule from "../components/practice-module";
 import { buildListFromParams } from "../lib/built-list-from-params";
 import { Character } from "../models/character";
-import { Difficulty } from "./mode-select";
+import { Difficulty, Mode } from "./mode-select";
 
 interface PracticeProps {
   charList: Character[];
   difficulty: Difficulty;
-  katakana: boolean
+  mode: Mode
 }
 
-const Practice = ({ charList, difficulty, katakana }: PracticeProps) => {
+const Practice = ({ charList, difficulty, mode }: PracticeProps) => {
   return (
     <div className="pt-4 px-6 font-roboto">
       <h1 className="text-5xl text-center mb-4">Practice</h1>
@@ -20,7 +20,7 @@ const Practice = ({ charList, difficulty, katakana }: PracticeProps) => {
         Type the pronunciation of the hiragana character that appears on screen
       </p>
 
-      <PracticeModule charList={charList} difficulty={difficulty} katakana={katakana} />
+      <PracticeModule charList={charList} difficulty={difficulty} mode={mode} />
 
       <div className="text-md text-center mt-28 text-gray-700">
         <p className="mb-4">Refresh to restart</p>
@@ -38,7 +38,7 @@ const Practice = ({ charList, difficulty, katakana }: PracticeProps) => {
 };
 
 const getServerSideProps = (context: NextPageContext) => {
-  const { difficulty, columns, katakana } = context.query;
+  const { difficulty, columns, mode } = context.query;
 
   if (!difficulty || !columns) {
     return {
@@ -57,7 +57,7 @@ const getServerSideProps = (context: NextPageContext) => {
     props: {
       charList,
       difficulty,
-      katakana
+      mode
     },
   };
 };

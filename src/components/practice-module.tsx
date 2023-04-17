@@ -3,17 +3,17 @@ import { FormEvent, useEffect, useState } from "react";
 import { fisherYatesShuffle } from "../lib/fisher-yates-shuffle";
 import { randomInt } from "../lib/random-int";
 import { Character } from "../models/character";
-import { Difficulty } from "../pages/mode-select";
+import { Difficulty, Mode } from "../pages/mode-select";
 import IncorrectGuessMessage from "./incorrect-guess-message";
 import PostGameDialog from "./post-game-dialog";
 
 interface PracticeModuleProps {
   charList: Character[];
   difficulty: Difficulty;
-  katakana: boolean
+  mode: Mode
 }
 
-const PracticeModule = ({ charList, difficulty, katakana }: PracticeModuleProps) => {
+const PracticeModule = ({ charList, difficulty, mode }: PracticeModuleProps) => {
   const [counter, setCounter] = useState(0);
   const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -86,10 +86,10 @@ const PracticeModule = ({ charList, difficulty, katakana }: PracticeModuleProps)
   return (
     <div className="mt-8">
       <div className='flex flex-row justify-center'>
-        <p className="text-9xl text-center font-kosugiMaru">
+        {(mode === Mode.HIRAGANA || mode === Mode.DUAL) && <p className="text-9xl text-center font-kosugiMaru">
           {charList[counter].hiragana}
-        </p>
-        {katakana && <p className="text-9xl text-center border-l border-black font-kosugiMaru">
+        </p>}
+        {(mode === Mode.KATAKANA || mode === Mode.DUAL) && <p className="text-9xl text-center border-l border-black font-kosugiMaru">
           {charList[counter].katakana}
         </p>}
 

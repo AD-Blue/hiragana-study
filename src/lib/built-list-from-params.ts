@@ -31,7 +31,7 @@ const buildListFromParams = (selectedChars: string[]): Character[] => {
     return fisherYatesShuffle(basicAlphabet);
   }
 
-  if (selectedChars.includes("Single")) {
+  if (selectedChars.includes("Ones")) {
     charList.push(...singleChars);
   }
 

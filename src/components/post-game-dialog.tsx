@@ -39,7 +39,7 @@ const PostGameDialog = ({
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 overflow-y-scroll max-h-44 sm:max-h-64 mb-14">
         {incorrectCharList.map((char, index) => (
           <p key={index}>
-            {char.romaji} = {char.hiragana}
+            {char.romaji} = {char.hiragana} ({char.katakana})
           </p>
         ))}
       </div>

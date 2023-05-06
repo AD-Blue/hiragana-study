@@ -25,8 +25,8 @@ const IncorrectGuessMessage: React.FC<IncorrectGuessMessageProps> = ({
           : "You entered an empty answer!"}
       </p>
       <p>
-        The correct spelling of {correctCharacter.hiragana} is{" "}
-        {correctCharacter.romaji}
+        The correct spelling of {correctCharacter.hiragana} (
+        {correctCharacter.katakana}) is {correctCharacter.romaji}
       </p>
     </div>
   );

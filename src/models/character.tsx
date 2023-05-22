@@ -253,16 +253,6 @@ const wChars: Character[] = [
     romaji: "wa",
   },
   {
-    hiragana: "ゐ",
-    katakana: "ヰ",
-    romaji: "wi",
-  },
-  {
-    hiragana: "ゑ",
-    katakana: "ヱ",
-    romaji: "we",
-  },
-  {
     hiragana: "を",
     katakana: "ヲ",
     romaji: "wo",
